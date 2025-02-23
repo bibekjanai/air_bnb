@@ -1,0 +1,63 @@
+<% layout("./layouts/boilerplate") -%>
+<body style="background-color: rgb(248, 249, 241);">
+
+
+    <form method="post" action="/listings/add"  class="needs-validation" novalidate enctype="multipart/form-data">
+        <label for="title" class="form-label">Enter Title: </label>
+        <input type="text" name="title" placeholder="enter Title" id="title" class="form-control" required>
+        <div class="valid-feedback">
+            Looks good!
+          </div>
+        <br>
+        <label for="description" class="form-label">Enter description: </label>
+        <textarea name="description" placeholder="enter description" id="description" class="form-control" required></textarea>
+        <div class="invalid-feedback">
+            please enter discription
+           </div>
+        <br>
+        <label for=" image" class="form-label">Upload Image File: </label>
+        <input type="file" name="image" placeholder="Upload" id=" image" class="form-control" required>
+        <br>
+        <label for=" price" class="form-label">Enter price: </label>
+        <input type="text" name="price" placeholder="enter  price" id=" price" class="form-control" required>
+        <div class="invalid-feedback">
+           price should be valid
+          </div>
+        <br>
+        <label for="location" class="form-label">Enter Location:</label>
+        <input type="text" name="location" placeholder="enter location" id="location" class="form-control" required>
+        <div class="invalid-feedback">
+            Enter location
+           </div>
+        <br>
+        <label for="country" class="form-label">Enter country: </label>
+        <input type="text" name="country" placeholder="enter country" id="country" class="form-control" required>
+        <div class="invalid-feedback">
+            country should be valid
+           </div>
+        <br><button class="btn btn-outline-danger">Submit</button>
+       
+    </form>
+
+
+    <script>
+        (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+    </script>
+</body>

@@ -1,0 +1,100 @@
+<% layout("/layouts/boilerplate") -%>
+
+<head>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(248, 249, 241);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .signup-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .signup-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #c82333;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <br><br>
+    <div class="container">
+        <div class="signup-container">
+            <form class="needs-validation" novalidate method="post" action="/listings/signUp">
+                <h1 class="nav">SignUp Form</h1>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">UserName</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" required>
+                    <div class="invalid-feedback">
+                        Enter UserName
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <div class="invalid-feedback">
+                        Enter Valid Email
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+                    <div class="invalid-feedback">
+                        Please provide a Password
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-custom btn-block">SignUp</button>
+            </form>
+        </div>
+    </div>
+    <br><br><br>
+
+    <!-- Add Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        (() => {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+</body>

@@ -1,0 +1,126 @@
+<% layout("/layouts/boilerplate") -%>
+<body style="background-color: rgb(248, 249, 241);">
+    <ul>
+        
+     <div style="width: 100%;">
+        <div class="row" style="width: 100%;">
+            <div class="col-md" width="rem" style="background-image: url('<%= detail.image.url%>'); height: 400px; background-size: cover; border-radius: 20px;">
+           </div>
+           <div class="col-md detailfont">
+            <h2 style="font-weight: bold;">Detail of <%= detail.title%> </h2>
+            <p><i> @ <%= detail.owner.username%></i></p>
+            <p> <%= detail.description%></p>
+            <p>
+                &#8377; <%= detail.price.toLocaleString("en-IN")%>/night</p>
+            <p><%= detail.location%> , <%= detail.country%></p>
+           <% if( currUser && currUser._id.equals(detail.owner._id)){ %>
+          
+            <div style=" margin-top: 20px; display: flex;">
+                <a href="/listings/<%= detail._id %>/edit" style="margin-right: 20px;"><button type="button" class="btn btn-outline-danger">Edit</button></a>
+                
+                <form method="post" action="/listings/<%= detail._id%>/delete?_method=DELETE">
+                    <button  class="btn btn-outline-danger">Delete</button>
+                </form>
+            </div>
+          <% } %>
+           
+           </div>
+            
+          </div>
+
+       <hr>
+       <% if(currUser){%>
+       <h2 class="all_proparty">Leave a Review</h2>
+       <form method="post" action="/listings/<%= detail._id%>/reviews" class="needs-validation" novalidate>
+       <br>
+       <fieldset class="starability-slot" >
+        <legend>First rating:</legend>
+        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+        <input type="radio" id="first-rate1" name="rating" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="first-rate2" name="rating" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="first-rate3" name="rating" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input type="radio" id="first-rate4" name="rating" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="first-rate5" name="rating" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+      </fieldset>
+        <br>
+        <div class="mb-3">
+
+            <label for="floatingTextarea2" class="form-label all_proparty"><legend class="all_proparty"> Commend</legend></label>
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="comment" required></textarea>
+            <div class="invalid-feedback">
+                Please Enter Reviews
+              </div>
+        </div>
+        
+        <button  class="btn btn-outline-danger">Enter</button>
+      </form>
+      <%}%>
+      <br>
+      <hr>
+      <h4 class="all_proparty"><% if(detail.reviews.length==0){%>
+        No reviews have been submitted yet. Please feel free to provide your feedback.
+      <% } else{%>
+        all the reviews
+        
+        <%} %>
+
+        %></h4>
+      
+      <div class="row container">
+     
+      <% for(i of detail.reviews) { %>
+       
+        <div class="card col-12 col-md-6 col-lg-5 ms-md-5 mb-4" style="background-color: transparent;">
+          <div class="card-body">
+            <h6 class="card-title"><b>@<%= i.author['username']%></b></h6>
+            <h6 class="card-title"><%= i.comment%></h6>
+            <p class="starability-result" data-rating="<%= i.rating %>">
+              Rated: <%= i.rating %> stars
+            </p>
+            <form method="post" action="/listings/<%= detail._id %>/delete/<%= i._id %>?_method=DELETE">
+              <button class="btn btn-outline-danger w-100">Delete</button>
+            </form>
+          </div>
+        </div>
+        
+          
+        <% } %>
+  
+    </div>
+
+    </ul>
+ 
+  
+    
+</div>
+
+
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
+</body>
+

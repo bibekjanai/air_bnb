@@ -1,0 +1,33 @@
+<% layout("./layouts/boilerplate") -%>
+
+<body style="background-color: rgb(248, 249, 241);">
+   
+    
+         
+        <div class="row" >
+            <% for(i of list){ %>
+            
+            <div class="col" style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <a href="/listings/<%=i._id%>/personaldetail" style="text-decoration: none;">
+                <div class="card rip mother" style="transition: transform 0.2s;">
+                    <div class="boy rip imgdiv" style="background-image: url('<%= i.image.url %>');">
+                    </div>
+                    
+                    <div class="card-body" style="margin-top: -10px;">
+                    <p class="card-text"><%=i.title%><br>&#8377; <%=i.price%>/night</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            
+            <style>
+                .card:hover {
+                transform: scale(1.05);
+                }
+            </style>
+            
+            <% } %>
+        </div>
+        
+    
+</body>
