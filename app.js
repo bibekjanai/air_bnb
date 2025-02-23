@@ -75,11 +75,10 @@ app.listen(8080,()=>{
 
 
 
-
-app.get("/", (req,res)=>{
-    res.send("bibek jaan");
-})
-
+app.get("/", trycatch(async (req, res, next) => {
+    let list = await Listing.find({});
+    res.render("homepage.ejs", { list });
+}));
 
 
 
